@@ -1,17 +1,27 @@
 import grovepi
 import math
-# Connect the Grove Temperature & Humidity Sensor Pro to digital port D4
-# This example uses the blue colored sensor.
-# SIG,NC,VCC,GND
-sensor = 4  # The Sensor goes on digital port 4.
+from influxdb import InfluxDBClient
 
 # temp_humidity_sensor_type
-# Grove Base Kit comes with the blue sensor.
-blue = 0    # The Blue col
+sensorId="74-2366894"
+sensorType="ambientProbe"
+sensor = 4
+blue = 0
+client = InfluxDBClient(host='192.168.100.157')
+while True:
+    try:
+        [temp,humidity] = grovepi.dht(sensor,blue)
+        if math.isnan(temp) == False and math.isnan(humidity) == False:
+            temp=temp*1.8+32
+            #print("temp = %.02f F humidity =%.02f%%"%(temp, humidity))
+            line = 'coffee_info,sensorId=%,sensorType=% temperature=%,humidity=%'%(sensorId, sensorType, temp, humidity)
+            client.write([line], {'db': 'hybrid-coffee'}, 204, 'line')
+    except IOError:
+        print ("Error")
 
-from influxdb import InfluxDBClient
-client = InfluxDBClient(host='localhost')
-line = 'coffee_info,sensorId="28-01204fee0355",sensorType="tempProbe" temperature=82.40'
+
+
+line = 'coffee_info,sensorId="28-01204fee0355",sensorType="ambientProbe" temperature=82.40,humidity=60'
 client.write([line], {'db': 'hybrid-coffee'}, 204, 'line')
 client.close
 
