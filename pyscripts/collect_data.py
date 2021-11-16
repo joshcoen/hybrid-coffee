@@ -3,7 +3,7 @@ import math
 from influxdb import InfluxDBClient
 
 # temp_humidity_sensor_type
-sensorId = 74-2366894
+sensorId = '74-2366894'
 sensorType = "ambientProbe"
 sensor = 4
 blue = 0
@@ -14,7 +14,7 @@ while True:
         if math.isnan(temp) == False and math.isnan(humidity) == False:
             temp=temp*1.8+32
             #print("temp = %.02f F humidity =%.02f%%"%(temp, humidity))
-            line = 'coffee_info,sensorId=%d,sensorType=%s temperature=%d,humidity=%d'%(sensorId, sensorType, temp, humidity)
+            line = 'coffee_info,sensorId=%s,sensorType=%s temperature=%d,humidity=%d'%(sensorId, sensorType, temp, humidity)
             client.write([line], {'db': 'hybrid-coffee'}, 204, 'line')
     except IOError:
         print ("Error")
