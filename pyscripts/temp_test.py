@@ -26,8 +26,8 @@ def read_temp_raw():
 
 def read_temp():
     lines = read_temp_raw()
+    senseid = 0
     for line in lines:
-        senseid = 0
         sensor = sensor_ids[senseid]
         print(sensor)
         senseid += 1
