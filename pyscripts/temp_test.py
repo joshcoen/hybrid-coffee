@@ -28,6 +28,7 @@ def read_temp_raw():
 def read_temp():
     sensordata = []
     lines = read_temp_raw()
+    print(lines)
     senseid = 0
     for line in lines:
         current_sensor = sensor_ids[senseid]
@@ -40,6 +41,7 @@ def read_temp():
             temp_c = float(temp_string) / 1000.0
             temp_f = temp_c * 9.0 / 5.0 + 32.0
             sensordata += current_sensor, temp_f
+    for
     print(sensordata)
     return sensordata
 
@@ -49,10 +51,9 @@ while True:
     sensorType = 'temperatureProbe'
     pos = 0
     for sensor in sensors:
-        print(sensor)
         # line = 'coffee_info,sensorId=%s,sensorType=%s temperature=%s' % (sensor[pos], sensorType, sensor[pos+1])
         # client.write([line], {'db': 'hybrid-coffee'}, 204, 'line')
-        print(line)
+        # print(line)
         pos += 1
         # print(sensor)
         time.sleep(1)
