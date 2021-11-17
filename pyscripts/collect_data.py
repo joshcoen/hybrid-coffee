@@ -64,7 +64,7 @@ while True:
     for value, key in read_temp():
         temp = 'coffee_info,sensor_id=%s,sensor_type=%s temperature=%s' % (value, sensorType, key)
         client.write([temp], {'db': 'hybrid-coffee'}, 204, 'line')
-        test = 'coffee_info1,sensor_id=%s,sensor_type=%s temperature=%s, time_precision='ms'' % (value, sensorType, key)
+        test = 'coffee_info1,sensor_id=%s,sensor_type=%s temperature=%s, time_precision=ms' % (value, sensorType, key)
         client.write_points([test])
         time.sleep(1)
     get_ambient()
