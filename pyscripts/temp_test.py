@@ -6,9 +6,9 @@ sensor1 = '/sys/bus/w1/devices/28-01204fe74e92/w1_slave'
 sensor2 = '/sys/bus/w1/devices/28-01204fee0355/w1_slave'
 sensor3 = '/sys/bus/w1/devices/28-012050011f8c/w1_slave'
 sensor_ids = ['28-01204fe74e92', '28-01204fee0355', '28-012050011f8c']
-print(sensor_ids[0])
-print(sensor_ids[1])
-print(sensor_ids[2])
+# print(sensor_ids[0])
+# print(sensor_ids[1])
+# print(sensor_ids[2])
 
 def read_temp_raw():
     f = open(sensor1, 'r')
@@ -30,9 +30,9 @@ def read_temp():
     senseid = 0
     for line in lines:
         current_sensor = sensor_ids[senseid]
-        print(current_sensor)
+        # print(current_sensor)
         senseid += 1
-        print(senseid)
+        # print(senseid)
         equals_pos = line[1].find('t=')
         if equals_pos != -1:
             temp_string = line[1][equals_pos+2:]
