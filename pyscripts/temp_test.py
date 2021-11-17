@@ -46,8 +46,12 @@ def read_temp():
 while True:
     sensors = []
     sensors = read_temp()
+    sensorType = 'temperatureProbe'
+    pos = 0
     for sensor in sensors:
-        # line = 'coffee_info,sensorId=%s,sensorType=%s temperature=%d' % (, sensorType, temp, humidity)
+        line = 'coffee_info,sensorId=%s,sensorType=%s temperature=%d' % (sensor[pos], sensorType, sensor[pos+1])
         # client.write([line], {'db': 'hybrid-coffee'}, 204, 'line')
+        print(line)
+        pos += 1
         # print(sensor)
         time.sleep(1)
