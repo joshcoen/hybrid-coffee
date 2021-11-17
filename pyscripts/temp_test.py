@@ -41,8 +41,7 @@ def read_temp():
             temp_c = float(temp_string) / 1000.0
             temp_f = temp_c * 9.0 / 5.0 + 32.0
             sensordata += current_sensor, temp_f
-    for
-    print(sensordata)
+    # print(sensordata)
     return sensordata
 
 while True:
