@@ -26,9 +26,9 @@ def read_temp_raw():
     return sensor1_lines, sensor2_lines, sensor3_lines
 
 def read_temp():
-    sensordata = []
+    sensordata_list = []
     lines = read_temp_raw()
-    print(lines)
+    # print(lines)
     senseid = 0
     for line in lines:
         current_sensor = sensor_ids[senseid]
@@ -40,14 +40,13 @@ def read_temp():
             temp_string = line[1][equals_pos+2:]
             temp_c = float(temp_string) / 1000.0
             temp_f = temp_c * 9.0 / 5.0 + 32.0
-            sensordata += current_sensor, temp_f
-    # print(sensordata)
-    return sensordata
+            sensordata_list.append((current_sensor, temp_f))
+    return sensordata_list
 
 while True:
-    sensors = []
     sensors = read_temp()
     sensorType = 'temperatureProbe'
+    print(sensors)
     pos = 0
     for sensor in sensors:
         # line = 'coffee_info,sensorId=%s,sensorType=%s temperature=%s' % (sensor[pos], sensorType, sensor[pos+1])
