@@ -49,7 +49,7 @@ def read_temp():
 def get_ambient():
     try:
         sensortype = "ambientProbe"
-        sensorid = '76-014897f0912f4'
+        sensorid = '76-014897f0912f'
         [temp,humidity] = grovepi.dht(sensor,blue)
         if math.isnan(temp) == False and math.isnan(humidity) == False:
             temp=temp*1.8+32
