@@ -29,7 +29,7 @@ def read_temp():
         senseid+=1
         while line[0].strip()[-3:] != 'YES':
             time.sleep(0.2)
-            line = read_temp_raw()
+            # line = read_temp_raw()
         equals_pos = line[1].find('t=')
         if equals_pos != -1:
             temp_string = line[1][equals_pos+2:]
