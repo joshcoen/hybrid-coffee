@@ -25,11 +25,12 @@ def read_temp_raw():
     return sensor1_lines, sensor2_lines, sensor3_lines
 
 def read_temp():
+    sensordata = []
     lines = read_temp_raw()
     senseid = 0
     for line in lines:
-        sensor = sensor_ids[senseid]
-        print(sensor)
+        current_sensor = sensor_ids[senseid]
+        print(current_sensor)
         senseid += 1
         print(senseid)
         equals_pos = line[1].find('t=')
@@ -37,8 +38,12 @@ def read_temp():
             temp_string = line[1][equals_pos+2:]
             temp_c = float(temp_string) / 1000.0
             temp_f = temp_c * 9.0 / 5.0 + 32.0
-            return sensor, temp_f
+            sensordata += current_sensor, temp_f
+    return sensordata
 
 while True:
-    print(read_temp())
-    time.sleep(1)
+    sensors = []
+    sensors = read_temp()
+    for sensor in sensors:
+        print(sensor)
+        time.sleep(1)
