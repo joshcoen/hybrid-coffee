@@ -1,6 +1,7 @@
 import glob
 import time
-
+from influxdb import InfluxDBClient
+client = InfluxDBClient(host='192.168.100.157')
 
 sensor1 = '/sys/bus/w1/devices/28-01204fe74e92/w1_slave'
 sensor2 = '/sys/bus/w1/devices/28-01204fee0355/w1_slave'
@@ -39,11 +40,14 @@ def read_temp():
             temp_c = float(temp_string) / 1000.0
             temp_f = temp_c * 9.0 / 5.0 + 32.0
             sensordata += current_sensor, temp_f
+    print(sensordata)
     return sensordata
 
 while True:
     sensors = []
     sensors = read_temp()
     for sensor in sensors:
-        print(sensor)
+        # line = 'coffee_info,sensorId=%s,sensorType=%s temperature=%d' % (, sensorType, temp, humidity)
+        # client.write([line], {'db': 'hybrid-coffee'}, 204, 'line')
+        # print(sensor)
         time.sleep(1)
