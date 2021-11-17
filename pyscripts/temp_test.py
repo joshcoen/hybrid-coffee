@@ -49,7 +49,8 @@ while True:
     sensorType = 'temperatureProbe'
     pos = 0
     for sensor in sensors:
-        line = 'coffee_info,sensorId=%s,sensorType=%s temperature=%s' % (sensor[pos], sensorType, sensor[pos+1])
+        print(sensor)
+        # line = 'coffee_info,sensorId=%s,sensorType=%s temperature=%s' % (sensor[pos], sensorType, sensor[pos+1])
         # client.write([line], {'db': 'hybrid-coffee'}, 204, 'line')
         print(line)
         pos += 1
