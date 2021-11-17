@@ -1,9 +1,11 @@
 import glob
 import time
 
+
 sensor1 = '/sys/bus/w1/devices/28-01204fe74e92/w1_slave'
 sensor2 = '/sys/bus/w1/devices/28-01204fee0355/w1_slave'
 sensor3 = '/sys/bus/w1/devices/28-012050011f8c/w1_slave'
+sensor_ids = ['28-01204fe74e92', '28-01204fee0355', '28-012050011f8c']
 
 def read_temp_raw():
     f = open(sensor1, 'r')
@@ -22,6 +24,7 @@ def read_temp_raw():
 def read_temp():
     lines = read_temp_raw()
     for line in lines:
+        senseid = 0
         while line[0].strip()[-3:] != 'YES':
             time.sleep(0.2)
             sensor_lines = read_temp_raw()
@@ -30,7 +33,9 @@ def read_temp():
             temp_string = line[1][equals_pos+2:]
             temp_c = float(temp_string) / 1000.0
             temp_f = temp_c * 9.0 / 5.0 + 32.0
-            return temp_f
+            sensor = sensor_ids[senseid]
+            return sensor, temp_f
+        senseid = senseid + 1
 
 while True:
     print(read_temp())
