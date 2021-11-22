@@ -67,12 +67,18 @@ def set_tare():
 
 
 def get_weight():
+    EMULATE_HX711 = False
+    referenceUnit = 479.5
+
     if not EMULATE_HX711:
         import RPi.GPIO as GPIO
         from hx711py.hx711 import HX711
     else:
         from hx711py.emulated_hx711 import HX711
     hx = HX711(23, 24)
+    hx.set_reading_format("MSB", "MSB")
+    hx.set_reference_unit(referenceUnit)
+    hx.reset()
 
     def cleanAndExit():
         print("Cleaning...")
@@ -92,7 +98,6 @@ def get_weight():
         print(weight)
         hx.power_down()
         hx.power_up()
-        time.sleep(0.1)
     except (KeyboardInterrupt, SystemExit):
         cleanAndExit()
 
@@ -102,4 +107,4 @@ while True:
     #read_temp()
     #get_ambient()
     get_weight()
-    time.sleep(1)
+    # time.sleep(1)
