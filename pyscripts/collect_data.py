@@ -68,7 +68,7 @@ def set_tare():
 
 def get_weight():
     EMULATE_HX711 = False
-    referenceUnit = 479.5
+    #referenceUnit = 479.5
     if not EMULATE_HX711:
         import RPi.GPIO as GPIO
         from hx711py.hx711 import HX711
@@ -76,7 +76,7 @@ def get_weight():
         from hx711py.emulated_hx711 import HX711
     hx = HX711(23, 24)
     hx.set_reading_format("MSB", "MSB")
-    hx.set_reference_unit(referenceUnit)
+    #hx.set_reference_unit(referenceUnit)
 
     def cleanAndExit():
         print("Cleaning...")
