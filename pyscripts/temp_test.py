@@ -11,6 +11,7 @@ temp_sensor_id = '28-01204fe74e92'
 sensor = 4
 blue = 0
 
+
 def get_data():
 
     def read_temp_raw():
@@ -73,7 +74,7 @@ def get_data():
         print("Bye!")
         sys.exit()
 
-    while true:
+    while True:
         #read_temp()
         #get_ambient()
         # time.sleep(1)
