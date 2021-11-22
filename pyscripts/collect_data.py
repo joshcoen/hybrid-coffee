@@ -45,11 +45,11 @@ def get_ambient():
     except IOError:
         print ("Error")
 
-def get_weight():
+#def get_weight():
 
 
 while True:
     read_temp()
     get_ambient()
-    get_weight()
+    #get_weight()
     time.sleep(1)
