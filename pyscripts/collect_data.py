@@ -46,7 +46,8 @@ def get_ambient():
     except IOError:
         print ("Error")
 
-def get_weight():
+
+def set_tare():
     EMULATE_HX711 = False
 
     referenceUnit = 479.5
@@ -57,6 +58,22 @@ def get_weight():
     else:
         from hx711py.emulated_hx711 import HX711
 
+    hx = HX711(23, 24)
+    hx.set_reading_format("MSB", "MSB")
+    hx.set_reference_unit(referenceUnit)
+    hx.reset()
+    hx.tare()
+    # print("Tare done! Add weight now...")
+
+
+def get_weight():
+    if not EMULATE_HX711:
+        import RPi.GPIO as GPIO
+        from hx711py.hx711 import HX711
+    else:
+        from hx711py.emulated_hx711 import HX711
+    hx = HX711(23, 24)
+
     def cleanAndExit():
         print("Cleaning...")
 
@@ -65,14 +82,6 @@ def get_weight():
 
         print("Bye!")
         sys.exit()
-
-    hx = HX711(23, 24)
-    hx.set_reading_format("MSB", "MSB")
-    hx.set_reference_unit(referenceUnit)
-    hx.reset()
-    hx.tare()
-
-    # print("Tare done! Add weight now...")
 
     try:
         sensor_type = 'weight'
@@ -88,6 +97,7 @@ def get_weight():
         cleanAndExit()
 
 
+set_tare()
 while True:
     #read_temp()
     #get_ambient()
