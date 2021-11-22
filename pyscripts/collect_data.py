@@ -27,7 +27,7 @@ def read_temp():
         temp_c = float(temp_string) / 1000.0
         temp_f = temp_c * 9.0 / 5.0 + 32.0
         # return temp_sensor_id, temp_f
-        temp = 'coffee_info,location=3445,sensor_type=%s,sensor_id=%s sensor_value=%s' % (sensor_type, temp_sensor_id, temp_f)
+        temp = 'coffee_info,location_id=3445,sensor_type=%s,sensor_id=%s sensor_value=%s' % (sensor_type, temp_sensor_id, temp_f)
         # print(temp)
         client.write([temp], {'db': 'hybrid-coffee'}, 204, 'line')
 
@@ -38,8 +38,8 @@ def get_ambient():
         [temp,humidity] = grovepi.dht(sensor,blue)
         if math.isnan(temp) == False and math.isnan(humidity) == False:
             temp=temp*1.8+32
-            ambient_temp = 'coffee_info,location=3445,sensor_type=ambient_temperature,sensor_id=%s sensor_value=%d' % (sensor_id, temp)
-            ambient_humidity = 'coffee_info,location=3445,sensor_type=humidity,sensor_id=%s sensor_value=%d' % (sensor_id, humidity)
+            ambient_temp = 'coffee_info,location_id=3445,sensor_type=ambient_temperature,sensor_id=%s sensor_value=%d' % (sensor_id, temp)
+            ambient_humidity = 'coffee_info,location_id=3445,sensor_type=humidity,sensor_id=%s sensor_value=%d' % (sensor_id, humidity)
             client.write([ambient_temp], {'db': 'hybrid-coffee'}, 204, 'line')
             client.write([ambient_humidity], {'db': 'hybrid-coffee'}, 204, 'line')
     except IOError:
