@@ -50,7 +50,7 @@ def get_ambient():
 def set_tare():
     EMULATE_HX711 = False
 
-    referenceUnit = 1
+    referenceUnit = 479.5
 
     if not EMULATE_HX711:
         import RPi.GPIO as GPIO
