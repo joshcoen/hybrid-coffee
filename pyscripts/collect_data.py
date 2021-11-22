@@ -3,7 +3,7 @@ import grovepi
 import time
 import math
 from influxdb import InfluxDBClient
-client = InfluxDBClient(host='192.168.100.157')
+client = InfluxDBClient(host='192.168.100.154')
 
 temp_sensor1 = '/sys/bus/w1/devices/28-01204fe74e92/w1_slave'
 temp_sensor_id = '28-01204fe74e92'
