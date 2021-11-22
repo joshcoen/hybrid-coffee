@@ -102,6 +102,7 @@ def get_weight():
         cleanAndExit()
 
 
+print("starting tare")
 set_tare()
 while True:
     #read_temp()
