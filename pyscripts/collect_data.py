@@ -77,6 +77,7 @@ def get_weight():
     hx = HX711(23, 24)
     hx.set_reading_format("MSB", "MSB")
     hx.set_reference_unit(referenceUnit)
+    hx.reset()
 
     def cleanAndExit():
         print("Cleaning...")
