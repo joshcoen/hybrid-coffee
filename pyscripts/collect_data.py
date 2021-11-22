@@ -50,7 +50,7 @@ def get_ambient():
 def set_tare():
     EMULATE_HX711 = False
 
-    #referenceUnit = 479.5
+    referenceUnit = 479.5
 
     if not EMULATE_HX711:
         import RPi.GPIO as GPIO
@@ -60,7 +60,7 @@ def set_tare():
 
     hx = HX711(23, 24)
     hx.set_reading_format("MSB", "MSB")
-    #hx.set_reference_unit(referenceUnit)
+    hx.set_reference_unit(referenceUnit)
     hx.reset()
     hx.tare()
     # print("Tare done! Add weight now...")
@@ -76,8 +76,8 @@ def get_weight():
         from hx711py.emulated_hx711 import HX711
     hx = HX711(23, 24)
     hx.set_reading_format("MSB", "MSB")
-    hx.set_reference_unit(referenceUnit)
-    hx.reset()
+    # hx.set_reference_unit(referenceUnit)
+    # hx.reset()
 
     def cleanAndExit():
         print("Cleaning...")
