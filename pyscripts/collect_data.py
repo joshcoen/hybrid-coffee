@@ -67,6 +67,7 @@ def set_tare():
 
 
 def get_weight():
+    EMULATE_HX711 = False
     if not EMULATE_HX711:
         import RPi.GPIO as GPIO
         from hx711py.hx711 import HX711
