@@ -38,8 +38,8 @@ def get_ambient():
         [temp,humidity] = grovepi.dht(sensor,blue)
         if math.isnan(temp) == False and math.isnan(humidity) == False:
             temp=temp*1.8+32
-            ambient_temp = 'coffee_info,sensor_id=%s,sensor_type="ambient_temperature", sensor_value=%d' % (sensor_id, temp)
-            ambient_humidity = 'coffee_info,sensor_id=%s,sensor_type=humidity, sensor_value=%d' % (sensor_id, humidity)
+            ambient_temp = 'coffee_info,location=3445,sensor_id=%s,sensor_type="ambient_temperature" sensor_value=%d' % (sensor_id, temp)
+            ambient_humidity = 'coffee_info,location=3445,sensor_id=%s,sensor_type=humidity sensor_value=%d' % (sensor_id, humidity)
             client.write([ambient_temp], {'db': 'hybrid-coffee'}, 204, 'line')
             client.write([ambient_humidity], {'db': 'hybrid-coffee'}, 204, 'line')
     except IOError:
