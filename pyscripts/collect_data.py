@@ -74,15 +74,18 @@ def get_weight():
 
     # print("Tare done! Add weight now...")
 
-    while True:
-        try:
-            val = max(0, int(hx.get_weight(5)))
-            print(val)
-            hx.power_down()
-            hx.power_up()
-            time.sleep(0.1)
-        except (KeyboardInterrupt, SystemExit):
-            cleanAndExit()
+    try:
+        sensor_type = 'weight'
+        weight_sensor_id = '84-0760223ee18d'
+        weight_val = max(0, int(hx.get_weight(5)))
+        weight = 'coffee_info,location_id=3445,sensor_type=%s,sensor_id=%s sensor_value=%s' % (sensor_type, weight_sensor_id, weight_val)
+        # client.write([weight], {'db': 'hybrid-coffee'}, 204, 'line')
+        print(weight)
+        hx.power_down()
+        hx.power_up()
+        time.sleep(0.1)
+    except (KeyboardInterrupt, SystemExit):
+        cleanAndExit()
 
 
 while True:
