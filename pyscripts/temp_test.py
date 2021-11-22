@@ -75,9 +75,8 @@ def get_data():
         sys.exit()
 
     while True:
-        #read_temp()
-        #get_ambient()
-        # time.sleep(1)
+        read_temp()
+        get_ambient()
         try:
             sensor_type = 'weight'
             weight_sensor_id = '84-0760223ee18d'
@@ -87,8 +86,8 @@ def get_data():
             print(weight)
             hx.power_down()
             hx.power_up()
+            time.sleep(1)
         except (KeyboardInterrupt, SystemExit):
             cleanAndExit()
-
 
 get_data()
