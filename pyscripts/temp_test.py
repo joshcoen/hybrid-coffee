@@ -32,7 +32,7 @@ def get_data():
             # return temp_sensor_id, temp_f
             temp = 'coffee_info,location_id=3445,sensor_type=%s,sensor_id=%s sensor_value=%s' % (sensor_type, temp_sensor_id, temp_f)
             # print(temp)
-            client.write([temp], {'db': 'hybrid-coffee'}, 204, 'line')
+            client.write([temp], {'db': 'coffee_events'}, 204, 'line')
 
 
     def get_ambient():
