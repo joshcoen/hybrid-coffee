@@ -4,7 +4,7 @@ import time
 import math
 import sys
 from influxdb import InfluxDBClient
-client = InfluxDBClient(host='192.168.100.154')
+client = InfluxDBClient(host='54.186.121.136')
 
 temp_sensor1 = '/sys/bus/w1/devices/28-01204fe74e92/w1_slave'
 temp_sensor_id = 'tps02'
