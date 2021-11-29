@@ -30,7 +30,7 @@ def get_data():
             temp_c = float(temp_string) / 1000.0
             temp_f = temp_c * 9.0 / 5.0 + 32.0
             # return temp_sensor_id, temp_f
-            temp = 'coffee_info,location_id=3445,sensor_type=%s,sensor_id=%s sensor_value=%s' % (sensor_type, temp_sensor_id, temp_f)
+            temp = 'obs,location_id=3445,sensor_type=%s,sensor_id=%s sensor_value=%s' % (sensor_type, temp_sensor_id, temp_f)
             # print(temp)
             client.write([temp], {'db': 'coffee_events'}, 204, 'line')
 
@@ -42,8 +42,8 @@ def get_data():
             [temp,humidity] = grovepi.dht(sensor,blue)
             if math.isnan(temp) == False and math.isnan(humidity) == False:
                 temp=temp*1.8+32
-                ambient_temp = 'coffee_info,location_id=3445,sensor_type=temperature,sensor_id=%s sensor_value=%d' % (sensor_id_amb, temp)
-                ambient_humidity = 'coffee_info,location_id=3445,sensor_type=humidity,sensor_id=%s sensor_value=%d' % (sensor_id_hum, humidity)
+                ambient_temp = 'obs,location_id=3445,sensor_type=temperature,sensor_id=%s sensor_value=%d' % (sensor_id_amb, temp)
+                ambient_humidity = 'obs,location_id=3445,sensor_type=humidity,sensor_id=%s sensor_value=%d' % (sensor_id_hum, humidity)
                 client.write([ambient_temp], {'db': 'coffee_events'}, 204, 'line')
                 client.write([ambient_humidity], {'db': 'coffee_events'}, 204, 'line')
         except IOError:
@@ -82,7 +82,7 @@ def get_data():
             sensor_type = 'weight'
             weight_sensor_id = 'ws03'
             weight_val = max(0, int(hx.get_weight(5)))
-            weight = 'coffee_info,location_id=3445,sensor_type=%s,sensor_id=%s sensor_value=%s' % (sensor_type, weight_sensor_id, weight_val)
+            weight = 'obs,location_id=3445,sensor_type=%s,sensor_id=%s sensor_value=%s' % (sensor_type, weight_sensor_id, weight_val)
             client.write([weight], {'db': 'coffee_events'}, 204, 'line')
             #print(weight)
             hx.power_down()
