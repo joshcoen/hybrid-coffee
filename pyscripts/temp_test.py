@@ -4,10 +4,10 @@ import time
 import math
 import sys
 from influxdb import InfluxDBClient
-client = InfluxDBClient(host='192.168.100.154')
+client = InfluxDBClient(host='54.186.121.136')
 
 temp_sensor1 = '/sys/bus/w1/devices/28-01204fe74e92/w1_slave'
-temp_sensor_id = '28-01204fe74e92'
+temp_sensor_id = 'tps02'
 sensor = 4
 blue = 0
 
@@ -37,14 +37,15 @@ def get_data():
 
     def get_ambient():
         try:
-            sensor_id = '76-014897f0912f'
+            sensor_id_amb = 'trs01'
+            sensor_id_hum = 'hs04'
             [temp,humidity] = grovepi.dht(sensor,blue)
             if math.isnan(temp) == False and math.isnan(humidity) == False:
                 temp=temp*1.8+32
-                ambient_temp = 'coffee_info,location_id=3445,sensor_type=ambient_temperature,sensor_id=%s sensor_value=%d' % (sensor_id, temp)
-                ambient_humidity = 'coffee_info,location_id=3445,sensor_type=humidity,sensor_id=%s sensor_value=%d' % (sensor_id, humidity)
-                client.write([ambient_temp], {'db': 'hybrid-coffee'}, 204, 'line')
-                client.write([ambient_humidity], {'db': 'hybrid-coffee'}, 204, 'line')
+                ambient_temp = 'coffee_info,location_id=3445,sensor_type=temperature,sensor_id=%s sensor_value=%d' % (sensor_id_amb, temp)
+                ambient_humidity = 'coffee_info,location_id=3445,sensor_type=humidity,sensor_id=%s sensor_value=%d' % (sensor_id_hum, humidity)
+                client.write([ambient_temp], {'db': 'coffee_events'}, 204, 'line')
+                client.write([ambient_humidity], {'db': 'coffee_events'}, 204, 'line')
         except IOError:
             print ("Error")
 
@@ -79,10 +80,10 @@ def get_data():
         get_ambient()
         try:
             sensor_type = 'weight'
-            weight_sensor_id = '84-0760223ee18d'
+            weight_sensor_id = 'ws03'
             weight_val = max(0, int(hx.get_weight(5)))
             weight = 'coffee_info,location_id=3445,sensor_type=%s,sensor_id=%s sensor_value=%s' % (sensor_type, weight_sensor_id, weight_val)
-            client.write([weight], {'db': 'hybrid-coffee'}, 204, 'line')
+            client.write([weight], {'db': 'coffee_events'}, 204, 'line')
             #print(weight)
             hx.power_down()
             hx.power_up()

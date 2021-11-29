@@ -5,7 +5,6 @@ import math
 import sys
 from influxdb import InfluxDBClient
 client = InfluxDBClient(host='54.186.121.136')
-
 temp_sensor1 = '/sys/bus/w1/devices/28-01204fe74e92/w1_slave'
 temp_sensor_id = 'tps02'
 sensor = 4
@@ -94,7 +93,7 @@ def get_weight():
         weight_sensor_id = 'ws03'
         weight_val = max(0, int(hx.get_weight(5)))
         weight = 'coffee_info,location_id=3445,sensor_type=%s,sensor_id=%s sensor_value=%s' % (sensor_type, weight_sensor_id, weight_val)
-        # client.write([weight], {'db': 'hybrid-coffee'}, 204, 'line')
+        # client.write([weight], {'db': 'coffee_events'}, 204, 'line')
         print(weight)
         hx.power_down()
         hx.power_up()
